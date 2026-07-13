@@ -108,16 +108,17 @@
         line-height: normal;
     }
     .formGroup{
+        width: 100%;
         gap: 4px;
     }
     .input{
+        min-width: 0;
         padding-top: 3.5px;
         padding-bottom: 3.5px;
         padding-left: 5.35px;
         padding-right: 22.65px;
         font-size: 14px;
         height: 26px;
-        max-width: 300px;
     }
     .input::placeholder{
         font-size: 14px;

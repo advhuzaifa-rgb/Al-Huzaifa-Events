@@ -48,6 +48,11 @@
     flex-direction: column;
     gap: 7px;
 }
+.one img{
+    max-width: 239px;
+    object-fit: cover;
+    max-height: 109px;
+}
 .twotop h4{
 font-family: var(--font-popins);
     color: #FFFFFF;
@@ -74,7 +79,7 @@ font-family: var(--font-popins);
 @media (max-width: 640px){
     .main{
         height: 100dvh;
-        background: url('./1m.webp');
+        background: url('/landing-hero-mobile.webp');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;

@@ -3,7 +3,7 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 export const metadata = {
-  metadataBase: new URL('https://summersale.alhuzaifa.com'),
+  metadataBase: new URL('https://al-huzaifa-events.vercel.app'),
   title: 'Summer Lounging | A State of Mind - Al Huzaifa Furniture Events',
   description:
     'Slow down, settle in, stay a while. Join Al Huzaifa Summer Lounging — an in-store summer experience with the Listening Lounge, Matcha Moments, and Mindful Movements wellness events.',
@@ -23,7 +23,7 @@ export const metadata = {
     title: 'Summer Lounging | A State of Mind — Al Huzaifa Furniture Events',
     description:
       'Slow down, settle in, stay a while. Discover the Al Huzaifa in-store Summer Lounging experience — curated music, matcha rituals, and mindful movement events.',
-    url: 'https://summersale.alhuzaifa.com',
+    url: 'https://al-huzaifa-events.vercel.app',
     siteName: 'Al Huzaifa Summer Lounging',
     images: [
       {
@@ -75,6 +75,22 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preload"
+          href="/landing-hero.webp"
+          as="image"
+          type="image/webp"
+          media="(min-width: 641px)"
+          fetchPriority="high"
+        />
+        <link
+          rel="preload"
+          href="/landing-hero-mobile.webp"
+          as="image"
+          type="image/webp"
+          media="(max-width: 640px)"
+          fetchPriority="high"
+        />
       </head>
       <body>
         <main>{children}</main>

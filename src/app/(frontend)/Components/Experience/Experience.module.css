@@ -186,12 +186,7 @@
     .icon{
         margin-bottom: 10px;
     }
-    .icon img{
-        width: auto;
-        height: auto;
-        max-width: 67px;
-        max-height: 56px;
-    }
+
     .blockHeading{
         font-size: 16px;
         margin-bottom: 6.96px;
