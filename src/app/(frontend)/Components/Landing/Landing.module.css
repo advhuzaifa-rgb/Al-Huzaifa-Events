@@ -73,7 +73,7 @@ font-family: var(--font-popins);
 }
 @media (max-width: 640px){
     .main{
-        height: 95dvh;
+        height: 100dvh;
         background: url('./1m.webp');
         background-size: cover;
         background-position: center;

@@ -117,6 +117,7 @@
         padding-right: 22.65px;
         font-size: 14px;
         height: 26px;
+        max-width: 300px;
     }
     .input::placeholder{
         font-size: 14px;
