@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import styles from './Journal.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -19,7 +19,21 @@ const ArrowIcon = () => (
 )
 
 const Journal = () => {
-  const [emblaRef] = useEmblaCarousel({ loop: false, align: 'start' })
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, align: 'start' })
+  const [selectedIndex, setSelectedIndex] = useState(0)
+
+  const scrollTo = useCallback((index) => emblaApi && emblaApi.scrollTo(index), [emblaApi])
+
+  const onSelect = useCallback((api) => {
+    setSelectedIndex(api.selectedScrollSnap())
+  }, [])
+
+  useEffect(() => {
+    if (!emblaApi) return
+    onSelect(emblaApi)
+    emblaApi.on('select', onSelect)
+    emblaApi.on('reInit', onSelect)
+  }, [emblaApi, onSelect])
 
   return (
     <div className={styles.main}>
@@ -43,6 +57,18 @@ const Journal = () => {
               </div>
             ))}
           </div>
+        </div>
+
+        <div className={styles.pills}>
+          {articles.map((_, index) => (
+            <button
+              type="button"
+              key={index}
+              className={`${styles.pill} ${index === selectedIndex ? styles.pillActive : ''}`}
+              onClick={() => scrollTo(index)}
+              aria-label={`Go to article ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
     </div>

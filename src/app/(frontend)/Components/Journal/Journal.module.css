@@ -87,9 +87,36 @@
     color: #CD7D6D;
     text-transform: uppercase;
 }
+.pills{
+    display: none;
+}
+.pill{
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #CD7D6D75;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: width 0.3s ease, border-radius 0.3s ease, background-color 0.3s ease;
+}
+.pillActive{
+    width: 22px;
+    height: 6px;
+    border-radius: 44px;
+    background-color: #CD7D6D;
+}
 @media (min-width: 641px) and (max-width: 1024px) {
     .slide{
         flex: 0 0 calc((100% - 61px) / 2);
+    }
+    .pills{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        margin-top: 18px;
     }
 }
 
@@ -120,6 +147,13 @@
     }
     .cta span{
         font-size: 14px;
+    }
+    .pills{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        margin-top: 18px;
     }
     .main{
         padding-bottom: 80px;

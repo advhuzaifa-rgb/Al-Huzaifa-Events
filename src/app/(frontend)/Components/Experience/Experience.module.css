@@ -175,7 +175,7 @@
     .right{
         flex-direction: column;
         width: 100%;
-        gap: 80px;
+        gap: 40px;
     }
     .line{
         display: none;

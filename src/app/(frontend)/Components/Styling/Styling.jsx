@@ -47,13 +47,13 @@ const Styling = () => {
           </div>
 
           <a
-            href="https://www.alhuzaifa.com/en"
+            href="#"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.cta}
           >
-            <span>Download the summer styling guide</span>
-            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <span>Coming soon</span>
+            {/* <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M10.75 0.75L14.75 5.75L10.75 10.75M14.75 5.75L0.75 5.75"
                 stroke="#CD7060"
@@ -61,7 +61,7 @@ const Styling = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
-            </svg>
+            </svg> */}
           </a>
         </div>
       </div>

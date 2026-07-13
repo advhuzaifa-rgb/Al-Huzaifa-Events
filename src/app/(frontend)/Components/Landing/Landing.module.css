@@ -85,15 +85,15 @@ font-family: var(--font-popins);
         background-repeat: no-repeat;
     }
     .MainConatiner{
-padding: 79px 24px;
-gap: 9px;
+padding: 48px 24px;
+gap: 5px;
     }
     .one{
-gap: 3px;
+gap: 14px;
     }
     .one img{
-        max-width: 195px;
-        max-height: 89px;
+        max-width: 153px;
+        max-height: 70px;
         object-fit: cover;
     }
     .one h1{
