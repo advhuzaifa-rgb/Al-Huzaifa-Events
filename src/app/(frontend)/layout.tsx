@@ -3,7 +3,7 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 export const metadata = {
-  metadataBase: new URL('https://al-huzaifa-events.vercel.app'),
+  metadataBase: new URL('https://campaigns.alhuzaifa.com'),
   title: 'Summer Lounging | A State of Mind - Al Huzaifa Furniture Events',
   description:
     'Slow down, settle in, stay a while. Join Al Huzaifa Summer Lounging — an in-store summer experience with the Listening Lounge, Matcha Moments, and Mindful Movements wellness events.',
@@ -23,7 +23,7 @@ export const metadata = {
     title: 'Summer Lounging | A State of Mind — Al Huzaifa Furniture Events',
     description:
       'Slow down, settle in, stay a while. Discover the Al Huzaifa in-store Summer Lounging experience — curated music, matcha rituals, and mindful movement events.',
-    url: 'https://al-huzaifa-events.vercel.app',
+    url: 'https://campaigns.alhuzaifa.com',
     siteName: 'Al Huzaifa Summer Lounging',
     images: [
       {
