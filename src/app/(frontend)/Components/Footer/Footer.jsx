@@ -14,12 +14,12 @@ const Footer = () => {
 
                 </div>
                 <div className={styles.topright}>
-                    <div className={styles.legal}>
+                    {/* <div className={styles.legal}>
                         <h3>Legal</h3>
                         <a href="https://www.alhuzaifa.com/en/privacy-policy" target="_blank" rel="noopener noreferrer"><p>Privacy Policy</p></a>
                         <a href="https://www.alhuzaifa.com/en/terms-and-conditions" target="_blank" rel="noopener noreferrer"><p>Terms & Conditions</p></a>
 
-                    </div>
+                    </div> */}
                     <div className={styles.connect}>
                          <h3>Connect</h3>
                         <a href="tel:+971600575754"><p>+971 600 575754</p></a>

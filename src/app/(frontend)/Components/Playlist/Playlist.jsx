@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Playlist.module.css'
 import Image from 'next/image'
-import rightimg from './1.webp'
+import rightimg from './1.png'
 
 const Playlist = () => {
   return (

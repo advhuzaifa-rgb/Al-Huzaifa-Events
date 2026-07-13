@@ -15,12 +15,12 @@ const events = [
   {
     title: 'Breathe & Bloom',
     description: 'Breathwork, Essential Oils & Matcha Making',
-    date: '15 July',
+    date: 'TBC',
   },
   {
     title: 'Clay & Calm',
     description: 'Pottery Workshop & Creative Conversation',
-    date: '15 July',
+    date: 'TBC',
   },
 ]
 
