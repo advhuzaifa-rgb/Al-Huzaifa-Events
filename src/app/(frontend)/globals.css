@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700&display=swap');
+
+@font-face {
+  font-family: 'PP Hatton';
+  src: url('/fonts/PPHatton-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Modernline';
+  src: url('/fonts/modernline-personal-use.bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-poppins: 'Poppins', sans-serif;
+  --font-lato: 'Lato', sans-serif;
+  --font-pp-hatton: 'PP Hatton', serif;
+  --font-modernline: 'Modernline', cursive;
+  --color-bg: #f5f5f5;
+  --color-text: #222;
+  --color-accent: #0070f3;
+--fs-32: clamp(1.25rem, 0.76vi + 1.09rem, 2rem);
+  --fs-42: clamp(1.25rem, 1.39vi + 0.95rem, 2.63rem);
+  --fs-46: clamp(1.5rem, 1.39vi + 1.2rem, 2.88rem);
+  --fs-32: clamp(1.25rem, 0.76vi + 1.09rem, 2rem);
+  --fs-40: clamp(1.25rem, 1.27vi + 0.98rem, 2.5rem);
+  --fs-70: clamp(1.5rem, 2.88vi + 0.93rem, 4.375rem);
+  --fs-20: clamp(1rem, 0.25vi + 0.95rem, 1.25rem);
+  --fs-67: clamp(2.5rem, 1.71vi + 2.14rem, 4.19rem);
+  --fs-25: clamp(0.88rem, 0.7vi + 0.73rem, 1.56rem);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+body {
+  font-family: var(--font-poppins), sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+.space {
+  height: 104px;
+  background-color: #ffff;
+}
+@media (max-width: 640px) {
+  .space {
+    display: none;
+  }
+}

@@ -1,0 +1,35 @@
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #FFFFFF;
+padding:
+  clamp(80px, 8vw, 120px)
+  clamp(24px, 3vw, 24px);
+}
+.MainConatiner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    
+}
+.MainConatiner p{
+    font-family: var(--font-poppins);
+    font-weight: 400;
+    color: #30271B;
+    font-size: var(--fs-20);
+    max-width: 864px;
+    text-align: center;
+
+}
+@media (max-width: 640px){
+    .main{
+        padding: 40px 24px 80px 24px;
+    }
+    .MainConatiner p{
+        max-width: 100%;
+        font-size: 14px;
+    }
+}

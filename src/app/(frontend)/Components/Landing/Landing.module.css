@@ -1,0 +1,125 @@
+.main{
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    height: 100dvh;
+    background: url('./1.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.MainConatiner{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: 1px;
+    flex-direction: column;
+    padding-top: 25px;
+}
+.one{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    grid-area: 0px;
+}
+.one h1{
+    font-family: var(--font-modernline);
+    color: #FFFFFF;
+    font-size: var(--fs-67);
+    font-weight: 400;
+    margin: 0;
+}
+.two{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    gap: 26px;
+}
+.twotop{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 7px;
+}
+.twotop h4{
+font-family: var(--font-popins);
+    color: #FFFFFF;
+    font-size: var(--fs-20);
+    font-weight: 400;
+    margin: 0;
+    letter-spacing: 14%;
+    text-transform: uppercase;
+}
+.line{
+    width: 287px;
+    height: 1.2px;
+    background-color: #FFFFFF;
+}
+.two p{
+    font-family: var(--font-popins);
+    color: #FFFFFF;
+    font-size: var(--fs-25);
+    font-weight: 400;
+    margin: 0;
+    letter-spacing: 14%;
+    text-transform: uppercase;
+}
+@media (max-width: 640px){
+    .main{
+        height: 95dvh;
+        background: url('./1m.webp');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .MainConatiner{
+padding: 79px 24px;
+gap: 9px;
+    }
+    .one{
+gap: 3px;
+    }
+    .one img{
+        max-width: 195px;
+        max-height: 89px;
+        object-fit: cover;
+    }
+    .one h1{
+        font-size: 40px;
+        text-align: center;
+
+    }
+    .two{
+        gap: 14px;
+    }
+    .twotop{
+        gap: 8px;
+    }
+    .twotop h4{
+        font-size: 16px;
+        text-align: center;
+    }
+    .line{
+        width: 145px;
+        height: 0.61px;
+    }
+    .two p{
+        font-size: 14px;
+        text-align: center;
+    }
+}
+@media (min-width: 350px) and (max-width:640px){
+    .one h1{
+        font-size: 40px;
+        text-align: center;
+        white-space: nowrap;
+
+    }
+}

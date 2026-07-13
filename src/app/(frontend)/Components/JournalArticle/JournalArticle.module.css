@@ -1,0 +1,133 @@
+.main{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: #FFFCF7;
+    padding: 150px clamp(24px, 4vw, 50px);
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+.topRow{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 120px;
+}
+.topRow h1{
+    flex: 1;
+    font-family: var(--font-pp-hatton);
+    font-weight: 500;
+    font-size: 48px;
+    color: #CD7D6D;
+    margin: 0;
+}
+.imageWrapper{
+    flex: 0 0 460px;
+}
+.image{
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.description{
+    margin: 75px 0 0 0;
+    font-family: var(--font-poppins);
+    font-weight: 400;
+    font-size: 32px;
+    color: #414141;
+}
+.points{
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    margin-top: 100px;
+}
+.point{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.point h2{
+    font-family: var(--font-pp-hatton);
+    font-weight: 500;
+    font-size: 40px;
+    color: #000000;
+    margin: 0;
+}
+.point p{
+    font-family: var(--font-poppins);
+    font-weight: 400;
+    font-size: 32px;
+    color: #414141;
+    margin: 0;
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .main{
+        padding: 100px 24px;
+    }
+    .topRow{
+        gap: 60px;
+    }
+    .topRow h1{
+        font-size: 36px;
+    }
+    .imageWrapper{
+        flex: 0 0 360px;
+    }
+    .description{
+        margin-top: 50px;
+        font-size: 22px;
+    }
+    .points{
+        gap: 50px;
+        margin-top: 60px;
+    }
+    .point h2{
+        font-size: 28px;
+    }
+    .point p{
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .main{
+        padding: 73px 24px 80px 24px;
+    }
+    .topRow{
+        flex-direction: column;
+        gap: 29px;
+    }
+    .topRow h1{
+        font-size: 24px;
+    }
+    .imageWrapper{
+        flex: none;
+        width: 100%;
+    }
+    .image{
+        height: 414px;
+        object-fit: cover;
+    }
+    .description{
+        margin-top: 23px;
+        font-size: 16px;
+    }
+    .points{
+        gap: 40px;
+        margin-top: 70px;
+    }
+    .point h2{
+        font-size: 20px;
+    }
+    .point p{
+        font-size: 16px;
+    }
+}

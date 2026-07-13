@@ -1,0 +1,124 @@
+.main{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: #ffffff;
+    padding:
+  0
+  clamp(24px, 10vw, 150px)
+  clamp(80px, 5vw, 83px)
+  clamp(24px, 10vw, 150px);
+
+}
+.MainContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: left;
+    gap: 30px;
+}
+.MainContainer h2{
+    font-family: var(--font-pp-hatton);
+    font-weight: 400;
+    font-size: var(--fs-32);
+    color: #CD7D6D;
+    margin: 0;
+
+}
+.viewport{
+    overflow: hidden;
+    width: 100%;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.container{
+    display: flex;
+    gap: 61px;
+}
+.slide{
+    flex: 0 0 calc((100% - 61px * 2) / 3);
+    min-width: 0;
+    display: flex;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.imageWrapper{
+    width: 100%;
+    min-height: 0;
+    aspect-ratio: 500 / 500;
+    overflow: hidden;
+}
+.image{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.card p{
+    font-family: var(--font-poppins);
+    font-weight: 400;
+    font-size: 20px;
+    color: #414141;
+    margin: 25px 0 0 0;
+}
+.cta{
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    align-self: flex-start;
+    gap: 7px;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    text-decoration: none;
+    margin-top: 12px;
+}
+.cta span{
+    font-family: var(--font-poppins);
+    font-weight: 500;
+    font-size: 20px;
+    color: #CD7D6D;
+    text-transform: uppercase;
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+    .slide{
+        flex: 0 0 calc((100% - 61px) / 2);
+    }
+}
+
+@media (max-width: 640px) {
+    .MainContainer{
+        gap: 24px;
+    }
+    .main{
+        padding-left: 24px;
+    }
+    .container{
+        gap: 20px;
+    }
+    .slide{
+        flex: 0 0 320px;
+    }
+    .imageWrapper{
+        aspect-ratio: unset;
+        height: 400px;
+    }
+    .card p{
+        font-size: 14px;
+        margin: 12px 0 0 0;
+    }
+    .cta{
+        gap: 4px;
+        margin-top: 9px;
+    }
+    .cta span{
+        font-size: 14px;
+    }
+    .main{
+        padding-bottom: 80px;
+    }
+}

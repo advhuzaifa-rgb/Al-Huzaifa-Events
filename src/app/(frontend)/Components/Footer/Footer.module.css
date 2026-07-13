@@ -1,0 +1,154 @@
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #FAF2F0;
+    padding:
+  clamp(80px, 7vw, 110px)
+  clamp(24px, 4vw, 50px)
+  clamp(20px, 2vw, 21px)
+  clamp(24px, 4vw, 50px);
+}
+.MainContainer{
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    width: 100%;
+
+    gap: clamp(40px, 7vw, 107px);
+}
+.top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+    flex-direction: row;
+padding:
+  0
+  clamp(24px, 7vw, 90px)
+  0
+  clamp(24px, 8vw, 100px);
+}
+.topleft{
+    display: flex;
+    justify-content: left;
+   
+}
+.topleft img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
+.topright{
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    gap: 114px;
+}
+.legal, .connect{
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    gap: 12px;
+}
+.legal h3, .connect h3{
+    font-size: 18px;
+    font-weight: 700;
+    color: #414141;
+    margin: 0;
+    font-family: var(--font-poppins);
+
+}
+.legal p, .connect p{
+    font-size: 18px;
+    font-weight: 400;
+    color: #414141;
+    margin: 0;
+    cursor: pointer;
+        font-family: var(--font-poppins);
+}
+.bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-direction: row;
+    padding-top: 10px;
+    border-top: 1px solid #41414180;
+}
+.bottom p{
+     font-size: 14px;
+    font-weight: 300;
+    color: #41414180;
+    margin: 0;
+
+        font-family: var(--font-poppins);
+}
+.im{
+    color: #414141;
+    cursor: pointer;
+}
+.legal a, .connect a, .bottom a{
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    color: inherit;
+    transition: text-decoration-color 0.3s ease;
+}
+.legal a:hover, .connect a:hover, .bottom a:hover{
+    text-decoration-color: currentColor;
+}
+@media (max-width: 640px) {
+    .main{
+        padding: 60px 24px 10px 24px;
+    }
+    .MainContainer{
+        gap: 37px;
+    }
+    .top{
+        flex-direction: column;
+        align-items: center;
+        gap: 36px;
+       padding-right: 0px;
+    }
+    .topleft{
+        justify-content: center;
+        width: 100%;
+    }
+    .topleft img{
+        width: 100%;
+        max-width: 152px;
+        height: 70px;
+        object-fit: contain;
+
+    }
+    .topright{
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+    }
+    .legal, .connect{
+        align-items: center;
+        text-align: center;
+    }
+    .connect{
+        order: 1;
+    }
+    .legal{
+        order: 2;
+    }
+    .legal h3, .connect h3{
+        font-size: 14px;
+    }
+    .legal p, .connect p{
+        font-size: 14px;
+    }
+    .bottom{
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        padding-top: 16px;
+    }
+}
