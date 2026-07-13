@@ -47,7 +47,7 @@ const Styling = () => {
           </div>
 
           <a
-            href="https://alhuzaifa1.ae"
+            href="https://www.alhuzaifa.com/en"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.cta}
