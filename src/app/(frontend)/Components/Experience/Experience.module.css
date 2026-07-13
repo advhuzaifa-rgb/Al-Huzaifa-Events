@@ -197,7 +197,11 @@
     }
     .cta span{
         font-size: 14px;
-        
+
+    }
+    .arrow svg{
+        width: 19px;
+        height: 19px;
     }
     .dropdown{
         padding: 16px 14px;

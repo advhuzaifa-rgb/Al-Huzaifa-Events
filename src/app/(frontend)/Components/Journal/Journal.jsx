@@ -30,16 +30,16 @@ const Journal = () => {
           <div className={styles.container}>
             {articles.map((article, index) => (
               <div className={styles.slide} key={index}>
-                <div className={styles.card}>
+                <Link href={`/journal/${article.slug}`} className={styles.card}>
                   <div className={styles.imageWrapper}>
                     <Image src={article.image} alt={article.title} className={styles.image} />
                   </div>
                   <p>{article.title}</p>
-                  <Link href={`/journal/${article.slug}`} className={styles.cta}>
+                  <span className={styles.cta}>
                     <span>Read the article</span>
                     <ArrowIcon />
-                  </Link>
-                </div>
+                  </span>
+                </Link>
               </div>
             ))}
           </div>
