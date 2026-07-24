@@ -3,7 +3,7 @@ import React, { useRef } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import styles from './page.module.css'
 
-const LANDING_URL = 'https://campaigns.alhuzaifa.com'
+const LANDING_URL = 'https://open.spotify.com/playlist/2u7iWbJ2pstbwTZJSAfWha'
 const PNG_SIZE = 2048 // high-res output for print
 
 const page = () => {

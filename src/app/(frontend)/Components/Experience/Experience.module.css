@@ -74,7 +74,7 @@
 }
 .ctaWrapper{
     position: relative;
-    margin-top: 7px;
+    margin-top: 12px;
 }
 .cta{
     display: inline-flex;
@@ -105,7 +105,7 @@
     top: calc(100% + 8px);
     left: 50%;
     transform: translateX(-50%);
-    width: min(320px, calc(100vw - 48px));
+    width: min(440px, calc(100vw - 48px));
     background-color: #FFFFFF;
     border: none;
     box-shadow: 0px -1px 7.6px 0px rgba(0, 0, 0, 0.13);
@@ -123,6 +123,10 @@
     gap: 12px;
     padding-bottom: 10px;
     border-bottom: 1px solid rgba(205, 112, 96, 0.1);
+}
+.event:last-child{
+    border-bottom: none;
+    padding-bottom: 0;
 }
 .eventLeft{
     display: flex;
@@ -151,6 +155,28 @@
     color: #CD7060;
     margin: 0;
     white-space: nowrap;
+}
+.eventCta{
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #CD7D6D;
+    border: none;
+    border-radius: 6px;
+    padding: 0 16px;
+    cursor: pointer;
+}
+.eventCtaText{
+    font-family: var(--font-pp-hatton);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 40px;
+    color: #ffffff;
+    white-space: nowrap;
+}
+.eventCtaArrow{
+    display: inline-flex;
 }
 
 @media (max-width: 1400px){
@@ -217,5 +243,16 @@
     .eventDate{
         font-size: 12px;
         font-weight: 500;
+    }
+    .eventCta{
+        padding: 0 12px;
+    }
+    .eventCtaText{
+        font-size: 16px;
+        line-height: 32px;
+    }
+    .eventCtaArrow svg{
+        width: 15px;
+        height: 12px;
     }
 }

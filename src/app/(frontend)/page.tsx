@@ -13,6 +13,7 @@ import NewsletterSection from './Components/NewsletterSection/NewsletterSection'
 import Playlist from './Components/Playlist/Playlist'
 import Styling from './Components/Styling/Styling'
 import Experience from './Components/Experience/Experience'
+import RsvpModal from './Components/RsvpModal/RsvpModal'
 
 
 export default async function HomePage() {
@@ -33,6 +34,7 @@ export default async function HomePage() {
       <NewsletterSection />
       <Journal />
       <Footer />
+      <RsvpModal />
     </>
   )
 }

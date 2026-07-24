@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     'newsletter-subscribers': NewsletterSubscriber;
+    'event-rsvps': EventRsvp;
     exports: Export;
     imports: Import;
     'payload-kv': PayloadKv;
@@ -83,6 +84,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'newsletter-subscribers': NewsletterSubscribersSelect<false> | NewsletterSubscribersSelect<true>;
+    'event-rsvps': EventRsvpsSelect<false> | EventRsvpsSelect<true>;
     exports: ExportsSelect<false> | ExportsSelect<true>;
     imports: ImportsSelect<false> | ImportsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -183,6 +185,24 @@ export interface Media {
 export interface NewsletterSubscriber {
   id: number;
   email: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "event-rsvps".
+ */
+export interface EventRsvp {
+  id: number;
+  fullName: string;
+  mobileNumber: string;
+  email: string;
+  instagram: string;
+  numberOfGuests: number;
+  /**
+   * Set automatically by the server; identifies which event this RSVP belongs to.
+   */
+  event: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -387,6 +407,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'newsletter-subscribers';
         value: number | NewsletterSubscriber;
+      } | null)
+    | ({
+        relationTo: 'event-rsvps';
+        value: number | EventRsvp;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -476,6 +500,20 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface NewsletterSubscribersSelect<T extends boolean = true> {
   email?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "event-rsvps_select".
+ */
+export interface EventRsvpsSelect<T extends boolean = true> {
+  fullName?: T;
+  mobileNumber?: T;
+  email?: T;
+  instagram?: T;
+  numberOfGuests?: T;
+  event?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -627,7 +665,7 @@ export interface TaskCreateCollectionExport {
     id: string;
     name: string;
     batchSize?: number | null;
-    collectionSlug: 'users' | 'media' | 'newsletter-subscribers' | 'exports' | 'imports';
+    collectionSlug: 'users' | 'media' | 'newsletter-subscribers' | 'event-rsvps' | 'exports' | 'imports';
     drafts?: ('yes' | 'no') | null;
     exportCollection: string;
     fields?: string[] | null;
