@@ -197,7 +197,10 @@ export interface EventRsvp {
   fullName: string;
   mobileNumber: string;
   email: string;
-  instagram: string;
+  /**
+   * No longer collected on the frontend form; kept optional for any older submissions.
+   */
+  instagram?: string | null;
   numberOfGuests: number;
   /**
    * Set automatically by the server; identifies which event this RSVP belongs to.

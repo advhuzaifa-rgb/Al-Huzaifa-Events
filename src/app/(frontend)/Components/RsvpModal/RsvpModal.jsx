@@ -26,7 +26,6 @@ const EMPTY_FORM = {
   fullName: '',
   mobileNumber: '',
   email: '',
-  instagram: '',
   numberOfGuests: '',
 }
 
@@ -136,7 +135,6 @@ const RsvpModal = () => {
           fullName: form.fullName.trim(),
           mobileNumber: form.mobileNumber.trim(),
           email: form.email.trim().toLowerCase(),
-          instagram: form.instagram.trim(),
           numberOfGuests: Number(form.numberOfGuests),
         }),
       })
@@ -261,14 +259,6 @@ const RsvpModal = () => {
                   onChange={handleFieldChange('email')}
                 />
                 <input
-                  type="text"
-                  required
-                  placeholder="Instagram"
-                  className={styles.input}
-                  value={form.instagram}
-                  onChange={handleFieldChange('instagram')}
-                />
-                <input
                   type="number"
                   required
                   min="1"
@@ -291,14 +281,6 @@ const RsvpModal = () => {
             )}
 
             {error && <p className={styles.errorText}>{error}</p>}
-
-            <p className={styles.limitNote}>
-              {seatInfo
-                ? `Seats are limited to ${seatInfo.limit} guests. ${seatInfo.remaining} seat${
-                    seatInfo.remaining === 1 ? '' : 's'
-                  } left.`
-                : 'Seats are limited to 40 guests.'}
-            </p>
           </>
         )}
       </div>

@@ -5,7 +5,7 @@ export const EVENT_SLUG = 'ikebana-morning-2026-08-01'
 
 export const getSeatLimit = () => {
   const parsed = Number(process.env.RSVP_SEAT_LIMIT)
-  return Number.isFinite(parsed) && parsed > 0 ? parsed : 40
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : 50
 }
 
 const getFilledSeats = async (req: PayloadRequest) => {
@@ -83,7 +83,10 @@ export const EventRsvps: CollectionConfig = {
     {
       name: 'instagram',
       type: 'text',
-      required: true,
+      required: false,
+      admin: {
+        description: 'No longer collected on the frontend form; kept optional for any older submissions.',
+      },
     },
     {
       name: 'numberOfGuests',
