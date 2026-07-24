@@ -39,8 +39,11 @@ const EMPTY_FORM = {
   fullName: '',
   mobileNumber: '',
   email: '',
-  numberOfGuests: '',
 }
+
+// The "Number of Guests" input has been removed from the form; every
+// submission now registers a single attendee by default.
+const SINGLE_GUEST_COUNT = 1
 
 const FULL_NAME_MAX_LENGTH = 50
 const MOBILE_NUMBER_MAX_DIGITS = 15
@@ -151,7 +154,7 @@ const RsvpModal = () => {
           fullName: form.fullName.trim(),
           mobileNumber: form.mobileNumber.trim(),
           email: form.email.trim().toLowerCase(),
-          numberOfGuests: Number(form.numberOfGuests),
+          numberOfGuests: SINGLE_GUEST_COUNT,
         }),
       })
 
@@ -303,15 +306,6 @@ const RsvpModal = () => {
                   className={styles.input}
                   value={form.email}
                   onChange={handleFieldChange('email')}
-                />
-                <input
-                  type="number"
-                  required
-                  min="1"
-                  placeholder="Number of Guests"
-                  className={styles.input}
-                  value={form.numberOfGuests}
-                  onChange={handleFieldChange('numberOfGuests')}
                 />
               </div>
 
