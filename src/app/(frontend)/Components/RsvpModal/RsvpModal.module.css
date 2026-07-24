@@ -17,7 +17,6 @@
   overflow-y: auto;
   background-color: #ffffff;
   border-radius: 20px;
-  padding: 25px 27px 63px 65px;
   scrollbar-width: thin;
   scrollbar-color: rgba(205, 125, 109, 0.5) transparent;
 }
@@ -49,17 +48,25 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  z-index: 1;
 }
 
-.heading {
-  font-family: var(--font-pp-hatton);
-  font-weight: 500;
-  font-size: 26px;
+.scriptHeading {
+  font-family: var(--font-modernline);
+  font-weight: 400;
+  font-size: 32px;
+  color: #cd7d6d;
+  text-align: center;
+  margin: 0 0 10px 0;
+}
+
+.description {
+  font-family: var(--font-poppins);
+  font-weight: 400;
+  font-size: 20px;
   color: #554e4e;
   text-align: center;
-  padding-right: 33px;
-  /* clears the 48px close button (top:25px) plus the 25px gap below it */
-  margin: 73px 0 23px 0;
+  margin: 0 0 33px 0;
 }
 
 .dateLine {
@@ -67,16 +74,27 @@
   font-weight: 400;
   font-size: 20px;
   color: #cd7d6d;
-  padding-right: 33px;
   text-align: center;
-  margin: 0 0 37px 0;
+  margin: 0 0 33px 0;
+}
+
+/* ---------- Form state ---------- */
+
+.formShell {
+  position: relative;
+  padding: 25px 27px 64px 63px;
+}
+
+.formContent {
+  /* clears the 48px close button (top:25px) plus the 10px gap below it */
+  margin-top: 58px;
+  padding-right: 35px;
 }
 
 .fieldsWrap {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  padding-right: 33px;
+  gap: 10px;
 }
 
 .input {
@@ -85,7 +103,7 @@
   height: 60px;
   padding: 0 18px;
   border: 1.31px solid rgba(115, 115, 115, 0.7);
-  border-radius: 8px;
+  border-radius: 3px;
   font-family: var(--font-poppins);
   font-weight: 400;
   font-size: 16px;
@@ -102,38 +120,26 @@
   opacity: 1;
 }
 
-.button {
-  display: block;
-  width: 93%;
-  padding: 15px;
+.submitBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60px;
+  margin-top: 20px;
   background-color: #cd7d6d;
   border: none;
-  border-radius: 8px;
+  border-radius: 3px;
   font-family: var(--font-poppins);
   font-weight: 500;
   font-size: 20px;
   color: #ffffff;
   cursor: pointer;
-  
 }
 
-.button:disabled {
+.submitBtn:disabled {
   opacity: 0.7;
   cursor: default;
-}
-
-.submitBtn {
-  margin-top: 20px;
-
-}
-
-.successText {
-  margin: 12px 0 0 0;
-  font-family: var(--font-poppins);
-  font-weight: 400;
-  font-size: 14px;
-  color: #cd7d6d;
-  text-align: center;
 }
 
 .errorText {
@@ -145,111 +151,178 @@
   text-align: center;
 }
 
-.limitNote {
-  margin: 12px 0 0 0;
-  font-family: var(--font-poppins);
-  font-weight: 400;
-  font-size: 16px;
-  color: #707070;
-    padding-right: 33px;
-  text-align: center;
+/* ---------- Sold out / waitlist state ---------- */
+
+.soldOutShell {
+  position: relative;
+  padding: 15px 17px 61px 37px;
 }
 
-/* Sold out / waitlist state */
-.soldOut {
+.soldOutShell .closeBtn {
+  top: 15px;
+  right: 17px;
+}
+
+.soldOutContent {
+  /* clears the 48px close button (top:15px) plus the 27px gap below it */
+  margin-top: 75px;
+  padding-right: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  
 }
 
-.soldOut .heading {
+.soldOutContent .scriptHeading {
   margin-bottom: 9px;
 }
 
-.divider {
-  width: 60px;
-  height: 1px;
-  background-color: #e5e5e5;
-  margin: 0 0 13px 0;
-}
-
-.fullText {
+.soldOutText {
   font-family: var(--font-poppins);
   font-weight: 400;
-  font-size: 16px;
-  line-height: 15px;
+  font-size: 14px;
+  line-height: 18px;
   color: #554e4e;
-  max-width: 444px;
-  
   text-align: center;
-  margin: 0 33px 28px 0;
+  margin: 0 0 17px 0;
 }
 
 .waitlistForm {
-  width: 93%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.waitlistForm .input {
-  margin-bottom: 18px;
-  width: 93%;
-}
-
-.exploreLink {
-  margin-top: 12px;
-  background: none;
-  border: none;
-  padding: 0;
+.waitlistInput {
+  display: block;
+  width: 100%;
+  height: 32px;
+  padding: 0 14px;
+  margin-bottom: 8px;
+  border: 1.31px solid rgba(115, 115, 115, 0.7);
+  border-radius: 3px;
   font-family: var(--font-poppins);
   font-weight: 400;
-  font-size: 16px;
-  text-decoration: underline;
-  color: #cd7d6d;
+  font-size: 14px;
+  color: #303030;
+  background-color: transparent;
+  outline: none;
+}
+
+.waitlistInput::placeholder {
+  font-family: var(--font-poppins);
+  font-weight: 400;
+  font-size: 14px;
+  color: #707070;
+  opacity: 1;
+}
+
+.notifyBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 32px;
+  margin-bottom: 13px;
+  background-color: #cd7d6d;
+  border: none;
+  border-radius: 3px;
+  font-family: var(--font-poppins);
+  font-weight: 400;
+  font-size: 12px;
+  color: #ffffff;
   cursor: pointer;
 }
 
-@media (max-width: 640px) {
-  .modal {
-    padding: 20px 18px 50px 35px;
-  }
-
-  .closeBtn {
-    top: 20px;
-    right: 18px;
-    width: 36px;
-    height: 36px;
-  }
-
-  .closeBtn svg {
-    width: 13px;
-    height: 13px;
-  }
-.fullText {
-  margin-right: 10px;
-  margin-bottom: 12px;
-
+.notifyBtn:disabled {
+  opacity: 0.7;
+  cursor: default;
 }
-.waitlistForm .input {
+
+.exploreLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.exploreLinkText {
+  font-family: var(--font-poppins);
+  font-weight: 400;
+  font-size: 12px;
+  text-decoration: underline;
+  color: #cd7d6d;
+}
+
+.exploreLinkArrow {
+  display: inline-flex;
+  text-decoration: none;
+}
+
+/* ---------- Thank you state ---------- */
+
+.thankYouShell {
+  position: relative;
+  padding: 15px 17px 61px 37px;
+}
+
+.thankYouShell .closeBtn {
+  top: 15px;
+  right: 17px;
+}
+
+.thankYouContent {
+  margin-top: 75px;
+  padding-right: 20px;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.thankYouContent .scriptHeading {
+  font-size: 24px;
   margin-bottom: 10px;
 }
-.exploreLink {
+
+.thankYouText {
+  font-family: var(--font-poppins);
+  font-weight: 400;
   font-size: 14px;
+  line-height: 20px;
+  color: #554e4e;
+  text-align: center;
+  max-width: 320px;
+  margin: 0;
 }
-  .heading {
-    font-size: 16px;
-    /* clears the 36px close button (top:20px) plus the 24px gap below it */
-    margin: 60px 0 20px 0;
+
+@media (max-width: 640px) {
+  .formShell {
+    padding: 19px 18px 70px 35px;
   }
 
-  .soldOut .heading {
-    margin-bottom: 12px;
+  .formContent {
+    /* clears the 36px close button (top:19px) plus the 4px gap below it */
+    margin-top: 40px;
+    padding-right: 21px;
+  }
+
+  .scriptHeading {
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+
+  .description {
+    font-size: 12px;
+    margin-bottom: 18px;
   }
 
   .dateLine {
     font-size: 12px;
-    margin: 0 0 20px 0;
+    margin-bottom: 18px;
   }
 
   .fieldsWrap {
@@ -264,25 +337,77 @@
   .input::placeholder {
     font-size: 12px;
   }
-  .heading, .dateLine, .fieldsWrap, .limitNote {
-    padding-right: 21px;
-  }
 
-  .button {
-    padding: 8px 8px 6px 8px;
+  .submitBtn {
+    height: 31px;
+    margin-top: 12px;
     font-size: 14px;
   }
 
-  .submitBtn {
-    margin-top: 12px;
+  .closeBtn {
+    top: 19px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
   }
 
-  .limitNote {
-    margin-top: 9px;
+  .closeBtn svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .soldOutShell,
+  .thankYouShell {
+    padding: 12px 13px 40px 22px;
+  }
+
+  .soldOutShell .closeBtn,
+  .thankYouShell .closeBtn {
+    top: 12px;
+    right: 13px;
+  }
+
+  .soldOutContent,
+  .thankYouContent {
+    margin-top: 46px;
+    padding-right: 12px;
+  }
+
+  .soldOutContent .scriptHeading {
+    margin-bottom: 6px;
+  }
+
+  .soldOutText {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .waitlistInput {
+    height: 28px;
     font-size: 12px;
   }
 
-  .fullText {
+  .waitlistInput::placeholder {
     font-size: 12px;
+  }
+
+  .notifyBtn {
+    height: 28px;
+    margin-bottom: 10px;
+  }
+
+  .thankYouContent {
+    min-height: 200px;
+  }
+
+  .thankYouContent .scriptHeading {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .thankYouText {
+    font-size: 12px;
+    line-height: 16px;
+    max-width: 260px;
   }
 }

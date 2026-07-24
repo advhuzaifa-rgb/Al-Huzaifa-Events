@@ -4,6 +4,7 @@ import styles from './RsvpModal.module.css'
 
 const RSVP_PARAM = 'rsvp'
 const RSVP_PARAM_VALUE = 'ikebana-morning'
+const EVENT_LABEL = 'The Art of Waiting'
 
 const CloseIcon = () => (
   <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -19,6 +20,19 @@ const CloseIcon = () => (
       d="M18.9654 0.313298C19.166 0.514162 19.2787 0.786443 19.2787 1.07033C19.2787 1.35422 19.166 1.6265 18.9654 1.82737L1.82502 18.9678C1.62195 19.157 1.35335 19.26 1.07581 19.2551C0.798281 19.2502 0.533483 19.1378 0.337207 18.9415C0.14093 18.7452 0.0285011 18.4804 0.0236044 18.2029C0.0187077 17.9254 0.121726 17.6568 0.310956 17.4537L17.4514 0.313298C17.6522 0.112683 17.9245 0 18.2084 0C18.4923 0 18.7646 0.112683 18.9654 0.313298Z"
       fill="#CD7D6D"
     />
+  </svg>
+)
+
+const ExploreArrow = () => (
+  <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M8.5 1L13 5.5L8.5 10"
+      stroke="#CD7D6D"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path d="M13 5.5H1" stroke="#CD7D6D" strokeWidth="1.3" strokeLinecap="round" />
   </svg>
 )
 
@@ -118,7 +132,9 @@ const RsvpModal = () => {
       return
     }
     if (!MOBILE_REGEX.test(form.mobileNumber.trim())) {
-      setError(`Enter a valid mobile number (up to ${MOBILE_NUMBER_MAX_DIGITS} digits, with optional country code).`)
+      setError(
+        `Enter a valid mobile number (up to ${MOBILE_NUMBER_MAX_DIGITS} digits, with optional country code).`,
+      )
       return
     }
     if (!EMAIL_REGEX.test(form.email.trim())) {
@@ -149,10 +165,6 @@ const RsvpModal = () => {
       setSubmitted(true)
       setForm(EMPTY_FORM)
       refreshSeatInfo()
-      setTimeout(() => {
-        setSubmitted(false)
-        close()
-      }, 2500)
     } catch {
       setError('Something went wrong. Please try again.')
     } finally {
@@ -187,46 +199,80 @@ const RsvpModal = () => {
 
   const isFull = seatInfo ? seatInfo.remaining <= 0 : false
 
+  if (submitted) {
+    return (
+      <div className={styles.overlay} onMouseDown={handleOverlayMouseDown}>
+        <div className={styles.modal} role="dialog" aria-modal="true">
+          <div className={styles.thankYouShell}>
+            <button type="button" className={styles.closeBtn} onClick={close} aria-label="Close">
+              <CloseIcon />
+            </button>
+            <div className={styles.thankYouContent}>
+              <h2 className={styles.scriptHeading}>Thank You</h2>
+              <p className={styles.thankYouText}>
+                Your RSVP for {EVENT_LABEL} has been received. A confirmation email will be sent
+                to you shortly.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (isFull) {
+    return (
+      <div className={styles.overlay} onMouseDown={handleOverlayMouseDown}>
+        <div className={styles.modal} role="dialog" aria-modal="true">
+          <div className={styles.soldOutShell}>
+            <button type="button" className={styles.closeBtn} onClick={close} aria-label="Close">
+              <CloseIcon />
+            </button>
+            <div className={styles.soldOutContent}>
+              <h2 className={styles.scriptHeading}>{EVENT_LABEL}</h2>
+              <p className={styles.soldOutText}>
+                is fully booked. Join the waitlist.
+                <br />
+                We&apos;ll notify you if a spot becomes available.
+              </p>
+              <form className={styles.waitlistForm} onSubmit={handleWaitlistSubmit}>
+                <input
+                  type="email"
+                  required
+                  placeholder="Email Address"
+                  className={styles.waitlistInput}
+                  value={waitlistEmail}
+                  onChange={(e) => setWaitlistEmail(e.target.value)}
+                />
+                <button type="submit" className={styles.notifyBtn} disabled={waitlistSubmitting}>
+                  {waitlistSubmitted ? 'Subscribed' : 'Notify me'}
+                </button>
+              </form>
+              <button type="button" className={styles.exploreLink} onClick={handleExploreClick}>
+                <span className={styles.exploreLinkText}>Explore Upcoming Experiences</span>
+                <span className={styles.exploreLinkArrow}>
+                  <ExploreArrow />
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className={styles.overlay} onMouseDown={handleOverlayMouseDown}>
       <div className={styles.modal} role="dialog" aria-modal="true">
-        <button type="button" className={styles.closeBtn} onClick={close} aria-label="Close">
-          <CloseIcon />
-        </button>
-
-        {isFull ? (
-          <div className={styles.soldOut}>
-            <h2 className={styles.heading}>
-              A Morning of Ikebana, Pottery &amp; Creative Conversation
-            </h2>
-            <div className={styles.divider} />
-            <p className={styles.fullText}>
-              This Experience Is Full
-              <br />
-              Join the waitlist for priority access or if a spot becomes available.
+        <div className={styles.formShell}>
+          <button type="button" className={styles.closeBtn} onClick={close} aria-label="Close">
+            <CloseIcon />
+          </button>
+          <div className={styles.formContent}>
+            <h2 className={styles.scriptHeading}>{EVENT_LABEL}</h2>
+            <p className={styles.description}>
+              Join us for a morning of Ikebana, Pottery &amp; Creative Conversation
             </p>
-            <form className={styles.waitlistForm} onSubmit={handleWaitlistSubmit}>
-              <input
-                type="email"
-                required
-                placeholder="Email Address"
-                className={styles.input}
-                value={waitlistEmail}
-                onChange={(e) => setWaitlistEmail(e.target.value)}
-              />
-              <button type="submit" className={styles.button} disabled={waitlistSubmitting}>
-                {waitlistSubmitted ? 'Subscribed' : 'Notify me'}
-              </button>
-            </form>
-            <button type="button" className={styles.exploreLink} onClick={handleExploreClick}>
-              Explore Upcoming Experiences &rarr;
-            </button>
-          </div>
-        ) : (
-          <>
-            <h2 className={styles.heading}>
-              A Morning of Ikebana, Pottery &amp; Creative Conversation
-            </h2>
             <p className={styles.dateLine}>Saturday, 1 August 2026 | 10:00 AM - 12:30 PM</p>
 
             <form onSubmit={handleSubmit}>
@@ -269,20 +315,14 @@ const RsvpModal = () => {
                 />
               </div>
 
-              <button type="submit" className={`${styles.button} ${styles.submitBtn}`} disabled={submitting}>
-                {submitted ? 'Submitted' : submitting ? 'Submitting...' : 'Submit'}
+              <button type="submit" className={styles.submitBtn} disabled={submitting}>
+                {submitting ? 'Submitting...' : 'Submit'}
               </button>
             </form>
 
-            {submitted && (
-              <p className={styles.successText}>
-                Thank you! Your RSVP has been submitted successfully.
-              </p>
-            )}
-
             {error && <p className={styles.errorText}>{error}</p>}
-          </>
-        )}
+          </div>
+        </div>
       </div>
     </div>
   )
