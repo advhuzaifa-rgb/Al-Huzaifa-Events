@@ -3,7 +3,8 @@ const CORAL = '#CD7060'
 const BODY_TEXT = '#554E4E'
 const VALUE_TEXT = 'rgba(65,65,65,0.9)'
 const DIVIDER_COLOR = '#554E4E'
-const BG_COLOR = '#FFF9F4'
+const OUTER_BG = '#ffffff'
+const CONTENT_BG = '#FFF9F4'
 const HEADER_IMG = 'https://campaigns.alhuzaifa.com/emailertop.png'
 
 const escapeHtml = (value: string): string =>
@@ -32,18 +33,18 @@ export function buildRsvpEmailHtml({ name }: { name: string; numberOfGuests?: nu
 }
 </style>
 </head>
-<body style="margin:0; padding:0; background-color:${BG_COLOR}; -webkit-text-size-adjust:100%;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:${BG_COLOR};">
+<body style="margin:0; padding:0; background-color:${OUTER_BG}; -webkit-text-size-adjust:100%;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:${OUTER_BG};">
 <tr>
 <td align="center" style="padding:0;">
-<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" class="container" style="width:600px; max-width:600px; background-color:${BG_COLOR};">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" class="container" style="width:600px; max-width:600px; background-color:${CONTENT_BG};">
 <tr>
 <td style="padding:0;">
 <img src="${HEADER_IMG}" width="600" alt="Al Huzaifa — Summer Lounging: A State of Mind" style="display:block; width:100%; max-width:600px; height:auto; border:0; outline:none; text-decoration:none;" />
 </td>
 </tr>
 <tr>
-<td align="center" class="content-pad" style="padding:44px 34px 45px 34px; background-color:${BG_COLOR};">
+<td align="center" class="content-pad" style="padding:44px 34px 45px 34px; background-color:${CONTENT_BG};">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr>
 <td align="center" style="font-family:${FONT}; font-size:16px; line-height:21px; font-weight:400; color:${BODY_TEXT};">Hi,</td>
