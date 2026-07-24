@@ -42,6 +42,28 @@ const sendBrevo = async (payload: {
   }
 }
 
+const detailRow = (label: string, value: unknown) =>
+  `<tr><td style="padding:8px;border:1px solid #ddd"><strong>${label}</strong></td><td style="padding:8px;border:1px solid #ddd">${value ?? '—'}</td></tr>`
+
+const buildAdminNotificationHtml = (doc: {
+  fullName: string
+  mobileNumber: string
+  email: string
+  numberOfGuests: number
+  createdAt?: string
+}) => `
+  <div style="font-family:Arial,Helvetica,sans-serif; max-width:520px; margin:0 auto; padding:20px;">
+    <h2 style="color:#333; margin:0 0 16px 0;">New RSVP submitted — ${EVENT_LABEL}</h2>
+    <table style="border-collapse:collapse; width:100%;">
+      ${detailRow('Name', doc.fullName)}
+      ${detailRow('Mobile', doc.mobileNumber)}
+      ${detailRow('Email', doc.email)}
+      ${detailRow('Number of Guests', doc.numberOfGuests)}
+    </table>
+    <p style="color:#999; font-size:12px; margin-top:16px;">Submitted on ${doc.createdAt || new Date().toISOString()}</p>
+  </div>
+`
+
 export const getSeatLimit = () => {
   const parsed = Number(process.env.RSVP_SEAT_LIMIT)
   return Number.isFinite(parsed) && parsed > 0 ? parsed : 50
@@ -114,11 +136,6 @@ export const EventRsvps: CollectionConfig = {
           return
         }
 
-        const emailHtml = buildRsvpEmailHtml({
-          name: doc.fullName,
-          numberOfGuests: doc.numberOfGuests,
-        })
-
         const emailTasks: Promise<void>[] = []
 
         if (adminEmail) {
@@ -127,7 +144,13 @@ export const EventRsvps: CollectionConfig = {
               sender: { email: verifiedSender, name: SENDER_NAME },
               to: [{ email: adminEmail, name: 'Admin' }],
               subject: `New RSVP — ${doc.fullName} (${doc.numberOfGuests} guests) | ${EVENT_LABEL}`,
-              htmlContent: emailHtml,
+              htmlContent: buildAdminNotificationHtml({
+                fullName: doc.fullName,
+                mobileNumber: doc.mobileNumber,
+                email: doc.email,
+                numberOfGuests: doc.numberOfGuests,
+                createdAt: doc.createdAt,
+              }),
             }).catch((err) => console.error('Failed to send admin email:', err)),
           )
         }
@@ -138,7 +161,10 @@ export const EventRsvps: CollectionConfig = {
               sender: { email: verifiedSender, name: SENDER_NAME },
               to: [{ email: doc.email, name: doc.fullName }],
               subject: `Event confirmation | ${EVENT_LABEL}`,
-              htmlContent: emailHtml,
+              htmlContent: buildRsvpEmailHtml({
+                name: doc.fullName,
+                numberOfGuests: doc.numberOfGuests,
+              }),
             }).catch((err) => console.error('Failed to send user confirmation email:', err)),
           )
         }
