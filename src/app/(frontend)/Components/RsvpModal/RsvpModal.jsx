@@ -30,6 +30,17 @@ const EMPTY_FORM = {
   numberOfGuests: '',
 }
 
+const FULL_NAME_MAX_LENGTH = 50
+const MOBILE_NUMBER_MAX_DIGITS = 15
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const MOBILE_REGEX = new RegExp(`^\\+?\\d{6,${MOBILE_NUMBER_MAX_DIGITS}}$`)
+
+const sanitizeMobileNumber = (value) => {
+  const hasLeadingPlus = value.trim().startsWith('+')
+  const digits = value.replace(/\D/g, '').slice(0, MOBILE_NUMBER_MAX_DIGITS)
+  return hasLeadingPlus ? `+${digits}` : digits
+}
+
 const RsvpModal = () => {
   const [open, setOpen] = useState(false)
   const [seatInfo, setSeatInfo] = useState(null)
@@ -93,10 +104,29 @@ const RsvpModal = () => {
     setForm((prev) => ({ ...prev, [field]: e.target.value }))
   }
 
+  const handleMobileChange = (e) => {
+    const sanitized = sanitizeMobileNumber(e.target.value)
+    setForm((prev) => ({ ...prev, mobileNumber: sanitized }))
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (submitting) return
     setError('')
+
+    if (form.fullName.trim().length === 0 || form.fullName.trim().length > FULL_NAME_MAX_LENGTH) {
+      setError(`Full name must be ${FULL_NAME_MAX_LENGTH} characters or fewer.`)
+      return
+    }
+    if (!MOBILE_REGEX.test(form.mobileNumber.trim())) {
+      setError(`Enter a valid mobile number (up to ${MOBILE_NUMBER_MAX_DIGITS} digits, with optional country code).`)
+      return
+    }
+    if (!EMAIL_REGEX.test(form.email.trim())) {
+      setError('Please enter a valid email address.')
+      return
+    }
+
     setSubmitting(true)
     try {
       const res = await fetch('/api/event-rsvps', {
@@ -206,6 +236,7 @@ const RsvpModal = () => {
                 <input
                   type="text"
                   required
+                  maxLength={FULL_NAME_MAX_LENGTH}
                   placeholder="Full Name"
                   className={styles.input}
                   value={form.fullName}
@@ -214,10 +245,12 @@ const RsvpModal = () => {
                 <input
                   type="tel"
                   required
+                  inputMode="tel"
+                  maxLength={MOBILE_NUMBER_MAX_DIGITS + 1}
                   placeholder="Mobile Number"
                   className={styles.input}
                   value={form.mobileNumber}
-                  onChange={handleFieldChange('mobileNumber')}
+                  onChange={handleMobileChange}
                 />
                 <input
                   type="email"

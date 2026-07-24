@@ -163,12 +163,12 @@
     gap: 6px;
     background-color: #CD7D6D;
     border: none;
-    border-radius: 6px;
-    padding: 0 16px;
+    border-radius: 0px;
+    padding: 0 6px;
     cursor: pointer;
 }
 .eventCtaText{
-    font-family: var(--font-pp-hatton);
+    font-family: var(--font-poppins);
     font-weight: 500;
     font-size: 20px;
     line-height: 40px;
