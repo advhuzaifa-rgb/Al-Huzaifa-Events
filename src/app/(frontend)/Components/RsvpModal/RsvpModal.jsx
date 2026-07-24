@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useState } from 'react'
 import styles from './RsvpModal.module.css'
 
 const RSVP_PARAM = 'rsvp'
-const RSVP_PARAM_VALUE = 'ikebana-morning'
 const EVENT_LABEL = 'The Art of Waiting'
 
 const CloseIcon = () => (
@@ -78,15 +77,16 @@ const RsvpModal = () => {
   }, [])
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    if (params.get(RSVP_PARAM) !== RSVP_PARAM_VALUE) return
-
+    // Opens by default for every landing page visit, not just the ?rsvp= deep link.
     setOpen(true)
     refreshSeatInfo()
 
-    params.delete(RSVP_PARAM)
-    const query = params.toString()
-    window.history.replaceState({}, '', `${window.location.pathname}${query ? `?${query}` : ''}`)
+    const params = new URLSearchParams(window.location.search)
+    if (params.has(RSVP_PARAM)) {
+      params.delete(RSVP_PARAM)
+      const query = params.toString()
+      window.history.replaceState({}, '', `${window.location.pathname}${query ? `?${query}` : ''}`)
+    }
   }, [refreshSeatInfo])
 
   useEffect(() => {
