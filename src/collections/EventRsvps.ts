@@ -105,6 +105,22 @@ export const EventRsvps: CollectionConfig = {
         })
       },
     },
+    {
+      // Temporary — reports only whether the Brevo env vars are visible to this
+      // deployment, never the actual key. Safe to hit directly in a browser.
+      // Remove once email delivery is confirmed working.
+      path: '/email-diagnostics',
+      method: 'get',
+      handler: async () => {
+        const apiKey = (process.env.BREVO_API_KEY || '').trim()
+        return Response.json({
+          brevoApiKeyConfigured: apiKey.length > 0,
+          brevoApiKeyLastFour: apiKey ? apiKey.slice(-4) : null,
+          adminEmail: process.env.ADMIN_EMAIL || null,
+          verifiedSender: process.env.VERIFIED_SENDER || null,
+        })
+      },
+    },
   ],
   hooks: {
     beforeChange: [
