@@ -1,102 +1,106 @@
+const FONT = "'Helvetica Neue', Helvetica, Arial, sans-serif"
 const CORAL = '#CD7060'
 const BODY_TEXT = '#554E4E'
-const VALUE_TEXT = 'rgba(65, 65, 65, 0.9)'
-// Dictated as "#0000", which isn't a resolvable color — using a soft neutral
-// divider that matches the card's cream/tan palette until the real value is confirmed.
-const DIVIDER_COLOR = 'rgba(0, 0, 0, 0.15)'
-const GRADIENT_BG = 'linear-gradient(180deg, #F5F2ED 0%, #E6DACC 55%, #EFD2B7 100%)'
-const FALLBACK_BG = '#EFD2B7'
+const VALUE_TEXT = 'rgba(65,65,65,0.9)'
+const DIVIDER_COLOR = '#554E4E'
+const GRADIENT_TOP = '#F5F2ED'
+const GRADIENT_BOTTOM = '#F9E8D7'
+const HEADER_IMG = 'https://campaigns.alhuzaifa.com/emailertop.png'
 
-const POPPINS_STACK = `'Poppins', Helvetica, Arial, sans-serif`
-// The site's custom "Modernline" script font is a local file and can't be embedded
-// in email clients reliably (most strip @font-face) — falls back to a system cursive font.
-const SCRIPT_STACK = `'Brush Script MT', 'Segoe Script', cursive`
+const escapeHtml = (value: string): string =>
+  value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
 
-const EVENT_DATE_LINES = ['Saturday, 1st Aug, 2026', '10:00 AM- 12:30PM']
-const EVENT_LOCATION_LINES = [
-  'Al Huzaifa, Al Wasl Flagship',
-  '(Next to Emirates Islamic, Shop No 7)',
-]
+export function buildRsvpEmailHtml({ name }: { name: string; numberOfGuests?: number | string }): string {
+  const safeName = escapeHtml(name)
 
-const row = (content: string, paddingTop: number) => `
-  <tr>
-    <td align="center" style="padding-top:${paddingTop}px;">${content}</td>
-  </tr>
-`
-
-const divider = () => `
-  <tr>
-    <td align="center" style="padding-top:20px;">
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td class="rsvp-divider" style="width:163px; height:1px; line-height:1px; font-size:1px; background-color:${DIVIDER_COLOR};">&nbsp;</td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-`
-
-const labelText = (text: string) =>
-  `<p style="margin:0; font-family:${POPPINS_STACK}; font-weight:500; font-size:16px; color:${CORAL};">${text}</p>`
-
-const valueText = (lines: string[]) =>
-  `<p style="margin:0; font-family:${POPPINS_STACK}; font-weight:500; font-size:16px; line-height:23px; color:${VALUE_TEXT};">${lines.join('<br/>')}</p>`
-
-export const buildRsvpEmailHtml = ({
-  name,
-  numberOfGuests,
-}: {
-  name: string
-  numberOfGuests: number
-}) => {
-  const guestCount = String(numberOfGuests).padStart(2, '0')
-
-  return `
-<style>
-  @media only screen and (max-width: 600px) {
-    .rsvp-card { width: 100% !important; }
-    .rsvp-pad { padding: 24px 20px !important; }
-    .rsvp-desc { max-width: 100% !important; }
-    .rsvp-divider { width: 110px !important; }
-  }
+  return `<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>Your place is reserved</title>
+<style type="text/css">
+@media only screen and (max-width: 620px) {
+  .container { width: 100% !important; }
+  .card { width: 100% !important; }
+  .card-pad { padding-left: 20px !important; padding-right: 20px !important; }
+  .desc { width: 100% !important; }
+}
 </style>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:${FALLBACK_BG};">
-  <tr>
-    <td align="center" style="padding:24px 12px;">
-      <table role="presentation" width="556" cellpadding="0" cellspacing="0" border="0" class="rsvp-card" style="width:556px; max-width:556px; background:${GRADIENT_BG}; background-color:${FALLBACK_BG};">
-        <tr>
-          <td class="rsvp-pad" style="padding:34px 48px;">
-            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-              ${row(`<p style="margin:0; font-family:${POPPINS_STACK}; font-weight:400; font-size:16px; color:${BODY_TEXT};">Hi,</p>`, 0)}
-              ${row(`<p style="margin:0; font-family:${SCRIPT_STACK}; font-weight:400; font-size:24px; color:${CORAL};">${name}</p>`, 0)}
-              ${row(
-                `<p class="rsvp-desc" style="margin:0 auto; max-width:455px; font-family:${POPPINS_STACK}; font-weight:400; font-size:16px; line-height:21px; color:${BODY_TEXT};">Your place has been reserved for The Art of Waiting. We look forward to welcoming you to a complimentary morning of ikebana, pottery and meaningful conversation, as part of Summer Lounging: A State of Mind.</p>`,
-                10,
-              )}
-              ${row(
-                `<p style="margin:0; font-family:${POPPINS_STACK}; font-weight:500; font-size:16px; line-height:23px; color:${CORAL};">${name}</p>`,
-                30,
-              )}
-              ${row(
-                `<p style="margin:0; font-family:${POPPINS_STACK}; font-weight:500; font-size:16px; line-height:23px; color:${CORAL};">Number of Attendees: ${guestCount}</p>`,
-                0,
-              )}
-              ${divider()}
-              ${row(labelText('DATE &amp; TIME'), 20)}
-              ${row(valueText(EVENT_DATE_LINES), 10)}
-              ${divider()}
-              ${row(labelText('LOCATION'), 20)}
-              ${row(valueText(EVENT_LOCATION_LINES), 10)}
-              ${row(
-                `<p style="margin:0; font-family:${POPPINS_STACK}; font-weight:400; font-size:16px; line-height:21px; color:${BODY_TEXT};">We look forward to sharing this morning with you.<br/><br/>Warm regards,<br/>The Al Huzaifa Team</p>`,
-                50,
-              )}
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
+</head>
+<body style="margin:0; padding:0; background-color:#ffffff; -webkit-text-size-adjust:100%;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff;">
+<tr>
+<td align="center" style="padding:0;">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" class="container" style="width:600px; max-width:600px;">
+<tr>
+<td style="padding:0;">
+<img src="${HEADER_IMG}" width="600" alt="Al Huzaifa — Summer Lounging: A State of Mind" style="display:block; width:100%; max-width:600px; height:auto; border:0; outline:none; text-decoration:none;" />
+</td>
+</tr>
+<tr>
+<td align="center" style="padding:0 22px;">
+<div style="margin-top:-53px;">
+<table role="presentation" width="556" cellpadding="0" cellspacing="0" border="0" class="card" bgcolor="${GRADIENT_BOTTOM}" style="width:556px; max-width:556px; background-color:${GRADIENT_BOTTOM}; background-image:linear-gradient(180deg, ${GRADIENT_TOP} 0%, ${GRADIENT_BOTTOM} 100%); border-radius:8px 8px 0 0;">
+<tr>
+<td align="center" class="card-pad" style="padding:44px 34px 45px 34px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="center" style="font-family:${FONT}; font-size:16px; line-height:21px; font-weight:400; color:${BODY_TEXT};">Hi,</td>
+</tr>
+<tr>
+<td align="center" style="padding-top:6px; font-family:${FONT}; font-size:24px; line-height:28px; font-weight:500; color:${CORAL};">${safeName}</td>
+</tr>
+<tr>
+<td align="center" style="padding-top:16px;">
+<table role="presentation" width="455" cellpadding="0" cellspacing="0" border="0" class="desc" style="width:455px; max-width:455px;">
+<tr>
+<td align="center" style="font-family:${FONT}; font-size:16px; line-height:21px; font-weight:400; color:${BODY_TEXT};">Your place has been reserved for <span style="color:${CORAL};">The Art of Waiting.</span><br />We look forward to welcoming you to a complimentary morning of ikebana, pottery and meaningful conversation, as part of Summer Lounging: A State of Mind.</td>
+</tr>
 </table>
-`
+</td>
+</tr>
+<tr>
+<td align="center" style="padding-top:40px; font-family:${FONT}; font-size:16px; line-height:20px; font-weight:400; color:${CORAL};">DATE &amp; TIME</td>
+</tr>
+<tr>
+<td align="center" style="padding-top:10px; font-family:${FONT}; font-size:16px; line-height:23px; font-weight:400; color:${VALUE_TEXT};">Saturday, 1st Aug, 2026<br />10:00 AM - 12:30 PM</td>
+</tr>
+<tr>
+<td align="center" style="padding-top:20px;">
+<table role="presentation" width="163" cellpadding="0" cellspacing="0" border="0" style="width:163px;">
+<tr>
+<td style="border-top:1px solid ${DIVIDER_COLOR}; font-size:0; line-height:0;">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td align="center" style="padding-top:20px; font-family:${FONT}; font-size:16px; line-height:20px; font-weight:400; color:${CORAL};">LOCATION</td>
+</tr>
+<tr>
+<td align="center" style="padding-top:10px; font-family:${FONT}; font-size:16px; line-height:23px; font-weight:400; color:${VALUE_TEXT};">Al Huzaifa, Al Wasl Flagship<br />( Next to Emirates Islamic, Shop No 7 )</td>
+</tr>
+<tr>
+<td align="center" style="padding-top:50px; font-family:${FONT}; font-size:16px; line-height:21px; font-weight:400; color:${BODY_TEXT};">We look forward to sharing this morning with you.<br /><br />Warm regards,<br />The Al Huzaifa Team</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>`
 }
