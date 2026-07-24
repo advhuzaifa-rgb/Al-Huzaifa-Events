@@ -6,19 +6,23 @@ export const EVENT_SLUG = 'ikebana-morning-2026-08-01'
 const EVENT_LABEL = 'The Art of Waiting'
 const SENDER_NAME = 'Al Huzaifa Summer Lounging'
 
+const LOG_TAG = '[RSVP-EMAIL]'
+
 const sendBrevo = async (payload: {
   sender: { email: string; name: string }
   to: { email: string; name?: string }[]
   subject: string
   htmlContent: string
 }) => {
+  const recipients = payload.to.map((t) => t.email).join(', ')
   const apiKey = (process.env.BREVO_API_KEY || '').trim()
   if (!apiKey) {
-    console.error('BREVO_API_KEY not set')
+    console.error(`${LOG_TAG} ABORTED — BREVO_API_KEY not set. Would have sent to: ${recipients}`)
     return
   }
 
   for (let attempt = 1; attempt <= 2; attempt++) {
+    console.log(`${LOG_TAG} attempt ${attempt} — calling Brevo API, sender=${payload.sender.email}, to=${recipients}, subject="${payload.subject}"`)
     const ctrl = new AbortController()
     const timer = setTimeout(() => ctrl.abort(), 10000)
     try {
@@ -31,11 +35,11 @@ const sendBrevo = async (payload: {
       clearTimeout(timer)
       const text = await res.text().catch(() => '<no-body>')
       if (!res.ok) throw new Error(`Brevo ${res.status}: ${text}`)
-      console.log(`Brevo email sent (attempt ${attempt})`)
+      console.log(`${LOG_TAG} SUCCESS — Brevo accepted email for ${recipients}. Response: ${text}`)
       return
     } catch (err: any) {
       clearTimeout(timer)
-      console.error(`Brevo attempt ${attempt} failed:`, err?.message)
+      console.error(`${LOG_TAG} FAILED attempt ${attempt} for ${recipients}:`, err?.message)
       if (attempt === 2) throw err
       await new Promise((r) => setTimeout(r, 400))
     }
@@ -142,13 +146,21 @@ export const EventRsvps: CollectionConfig = {
     ],
     afterChange: [
       async ({ doc, operation }) => {
-        if (operation !== 'create') return
+        console.log(`${LOG_TAG} afterChange hook fired — operation=${operation}, docId=${doc?.id}`)
+        if (operation !== 'create') {
+          console.log(`${LOG_TAG} skipped — not a create operation`)
+          return
+        }
 
         const verifiedSender = process.env.VERIFIED_SENDER || process.env.ADMIN_EMAIL
         const adminEmail = process.env.ADMIN_EMAIL
 
+        console.log(
+          `${LOG_TAG} config check — verifiedSender=${verifiedSender || '(missing)'}, adminEmail=${adminEmail || '(missing)'}, guestEmail=${doc.email || '(missing)'}`,
+        )
+
         if (!verifiedSender) {
-          console.error('VERIFIED_SENDER or ADMIN_EMAIL not set')
+          console.error(`${LOG_TAG} ABORTED — VERIFIED_SENDER or ADMIN_EMAIL not set`)
           return
         }
 
@@ -167,8 +179,10 @@ export const EventRsvps: CollectionConfig = {
                 numberOfGuests: doc.numberOfGuests,
                 createdAt: doc.createdAt,
               }),
-            }).catch((err) => console.error('Failed to send admin email:', err)),
+            }).catch((err) => console.error(`${LOG_TAG} Failed to send admin email:`, err)),
           )
+        } else {
+          console.log(`${LOG_TAG} skipping admin email — ADMIN_EMAIL not set`)
         }
 
         if (doc.email) {
@@ -181,11 +195,15 @@ export const EventRsvps: CollectionConfig = {
                 name: doc.fullName,
                 numberOfGuests: doc.numberOfGuests,
               }),
-            }).catch((err) => console.error('Failed to send user confirmation email:', err)),
+            }).catch((err) => console.error(`${LOG_TAG} Failed to send user confirmation email:`, err)),
           )
+        } else {
+          console.log(`${LOG_TAG} skipping guest email — no email on this RSVP doc`)
         }
 
-        await Promise.allSettled(emailTasks)
+        console.log(`${LOG_TAG} queued ${emailTasks.length} email task(s), waiting for completion...`)
+        const results = await Promise.allSettled(emailTasks)
+        console.log(`${LOG_TAG} done — results: ${results.map((r) => r.status).join(', ')}`)
       },
     ],
   },
