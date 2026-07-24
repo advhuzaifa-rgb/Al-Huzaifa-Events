@@ -17,7 +17,7 @@ const Playlist = () => {
               </p>
             </div>
             <a
-              href="https://open.spotify.com"
+              href="https://open.spotify.com/playlist/2u7iWbJ2pstbwTZJSAfWha?si=kAR7UIC-TAmniin1a_o1mg&utm_source=copy-link"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.cta}
